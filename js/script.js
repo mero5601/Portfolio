@@ -70,8 +70,37 @@ document.addEventListener("DOMContentLoaded", function() {
         // Hide the iframe container
         iframeContainer.style.display = "none";
     });
+
+   
+    document.querySelector('.back-button').addEventListener('click', function() {
+        // Close the PDF viewer (assuming you're using PDF.js)
+        let pdfViewer = document.getElementById('pdf-viewer');
+        pdfViewer.innerHTML = '';
+    
+        // Go back in history
+        window.history.back();
+    });
+
+
 });
 
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }
+
+  // Event listener for the toggle button
+  document.querySelector('[data-theme-btn]').addEventListener('click', () => {
+    let currentTheme = localStorage.getItem('theme') || 'dark';
+    let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+  });
+
+  // Apply the saved theme or default to dark mode
+  (function() {
+    let savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+})();
 
 
 
