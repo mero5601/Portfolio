@@ -851,9 +851,12 @@ body {
 }
 
 .contact-form{
+  position: absolute;
+  top: 107px;
+  right: 480px;
   background-color: var(--surface-container);
   padding: 16px;
-  margin-block-end: 16px;
+  margin-block-end: 20px;
   border-radius:var(--radius-medium);
 }
 
@@ -921,9 +924,9 @@ body {
 
   /* CONTACT */
   .contact-tab .container {
-    display: grid;
+    display: flex;
     align-items: flex-start;
-    grid-template-columns: 0.6fr 1fr;
+    grid-template-columns: 0.1fr 1fr;
     gap: 24px;
   }
 }
