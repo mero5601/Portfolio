@@ -16,6 +16,11 @@
 
 :root{
 
+  .list li:nth-child(4) {
+    margin: 5px; /* Adjust this value to reduce the separator size */
+    /* Optionally adjust padding, border, or other styles */
+}
+
   /**
   *COLORS
   */
@@ -100,6 +105,19 @@
 }
 
 
+.section-title {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;  /* If you want them centered */
+  color: #D1BDFF; 
+}
+
+.technical-skills-container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;  /* Match this with other sections */
+  padding-right: 20px;
+}
 
 [data-theme="light"]{                     
 
@@ -742,13 +760,18 @@ body {
 .resume-tab .list{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,lfr));
-  gap:24px;
+  gap:18px;
   margin-block-end:28px;
 } 
 
 .resume-card{
   display:grid;
   gap:4px;
+  margin-bottom:1px
+}
+
+.resume-card p.body-large {
+  margin-bottom: 5px; /* Adjust as needed */
 }
 
 .resume-card .card-subtitle{
@@ -762,7 +785,7 @@ body {
 .resume-bottom-list{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
-  gap:8px;
+  gap:8x;
   text-decoration: none !important;
 }
 
