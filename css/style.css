@@ -105,6 +105,7 @@
 }
 
 
+
 .section-title {
   margin-left: auto;
   margin-right: auto;
@@ -117,6 +118,32 @@
   margin-right: auto;
   padding-left: 20px;  /* Match this with other sections */
   padding-right: 20px;
+}
+
+#theme-toggle {
+    position: relative;
+}
+
+#theme-toggle::after {
+    content: '';
+    position: absolute;
+    top: -30px; /* Adjust to position above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--arrow-color, black); /* Default arrow color */
+}
+
+/* Optional: Customize arrow color based on the theme */
+[data-theme="dark"] #theme-toggle::after {
+    border-bottom-color: white; /* Arrow color in dark mode */
+}
+
+[data-theme="light"] #theme-toggle::after {
+    border-bottom-color: black; /* Arrow color in light mode */
 }
 
 [data-theme="light"]{                     
