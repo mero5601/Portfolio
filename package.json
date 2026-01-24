@@ -1,0 +1,9 @@
+{
+  "name": "devfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static portfolio site",
+  "scripts": {
+    "dev": "npx http-server -p 8000"
+  }
+}
