@@ -1,104 +1,61 @@
-
-
 "use strict";
 
-/**
- * *Light and dark mode
- *
- */
+const themeButton = document.querySelector("[data-theme-btn]");
+const root = document.documentElement;
+const yearElement = document.querySelector("[data-year]");
 
-const /** {NodeElement} */ $themeBtn= document.querySelector("[data-theme-btn]");
-const /** {NodeElement} */ $HTML= document.documentElement;
-let isDark=window.matchMedia("(prefers-color-scheme:dark)").matches;
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+const storedTheme = localStorage.getItem("theme");
+const initialTheme = storedTheme || (prefersDark ? "dark" : "light");
 
-if(sessionStorage.getItem("theme")){
-    $HTML.dataset.theme=sessionStorage.getItem("theme");
-} else {
-    $HTML.dataset.theme=isDark ? "dark" : "light";
-    sessionStorage.setItem("theme", $HTML.dataset.theme);
-}
-
-const changeTheme= ()=>{
-$HTML.dataset.theme=sessionStorage.getItem("theme")=="light"?"dark":
-"light";
-sessionStorage.setItem("theme", $HTML.dataset.theme);
-}
-$themeBtn.addEventListener("click", changeTheme);
-
-
-/**
- * *TAB
- */
-
-const /**{NodeList}*/ $tabBtn = document.querySelectorAll("[data-tab-btn]");
-let /**{NodeElement}*/ [lastActiveTab]=document.querySelectorAll("[data-tab-content]");
-let /** {NodeElement} */[lastActiveTabBtn]= $tabBtn;
-
-$tabBtn.forEach(item=>{
-    item.addEventListener("click", function (){
-        
-        lastActiveTab.classList.remove("active");
-        lastActiveTabBtn.classList.remove("active");
-
-        const /** {NodeElement}  */ $tabContent= 
-        document.querySelector(`[data-tab-content="${item.dataset.tabBtn}"]`);
-        $tabContent.classList.add("active");
-        this.classList.add("active");
-
-        lastActiveTab=$tabContent;
-        lastActiveTabBtn=this;
-
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    var projectCard = document.getElementById("project-card");
-    var iframeContainer = document.getElementById("iframe-container");
-    var closeButton = document.getElementById("close-btn");
-
-    projectCard.addEventListener("click", function(event) {
-        event.preventDefault();  // Prevent the default action
-
-        // Display the iframe container
-        iframeContainer.style.display = "block";
-    });
-
-    closeButton.addEventListener("click", function() {
-        // Hide the iframe container
-        iframeContainer.style.display = "none";
-    });
-
-   
-    document.querySelector('.back-button').addEventListener('click', function() {
-        // Close the PDF viewer (assuming you're using PDF.js)
-        let pdfViewer = document.getElementById('pdf-viewer');
-        pdfViewer.innerHTML = '';
-    
-        // Go back in history
-        window.history.back();
-    });
-
-
-});
-
-function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+const updateThemeButton = (theme) => {
+  if (!themeButton) {
+    return;
   }
 
-  // Event listener for the toggle button
-  document.querySelector('[data-theme-btn]').addEventListener('click', () => {
-    let currentTheme = localStorage.getItem('theme') || 'dark';
-    let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    applyTheme(newTheme);
+  const label = themeButton.querySelector(".theme-label");
+  themeButton.setAttribute("aria-pressed", theme === "dark");
+
+  if (label) {
+    label.textContent = theme === "dark" ? "Dark" : "Light";
+  }
+};
+
+root.dataset.theme = initialTheme;
+updateThemeButton(initialTheme);
+
+if (themeButton) {
+  themeButton.addEventListener("click", () => {
+    const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = nextTheme;
+    localStorage.setItem("theme", nextTheme);
+    updateThemeButton(nextTheme);
   });
+}
 
-  // Apply the saved theme or default to dark mode
-  (function() {
-    let savedTheme = localStorage.getItem('theme') || 'dark';
-    applyTheme(savedTheme);
-})();
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
 
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const revealTargets = document.querySelectorAll(
+  ".work-card, .timeline-item, .skill-card, .cert-card, .skill-category, .about-panel, .contact-panel, .contact-form"
+);
 
+if (!prefersReducedMotion && "IntersectionObserver" in window) {
+  revealTargets.forEach((el) => el.classList.add("reveal"));
 
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
 
+  revealTargets.forEach((el) => observer.observe(el));
+}
