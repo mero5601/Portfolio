@@ -59,3 +59,99 @@ if (!prefersReducedMotion && "IntersectionObserver" in window) {
 
   revealTargets.forEach((el) => observer.observe(el));
 }
+
+const navToggle = document.querySelector("[data-nav-toggle]");
+const siteNav = document.querySelector("#site-nav");
+
+if (navToggle && siteNav) {
+  const closeNav = () => {
+    siteNav.classList.remove("is-open");
+    navToggle.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("nav-open");
+  };
+
+  navToggle.addEventListener("click", () => {
+    const isOpen = !siteNav.classList.contains("is-open");
+    siteNav.classList.toggle("is-open", isOpen);
+    navToggle.classList.toggle("is-open", isOpen);
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    document.body.classList.toggle("nav-open", isOpen);
+  });
+
+  siteNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeNav);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeNav();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900) {
+      closeNav();
+    }
+  });
+}
+
+const navLinks = document.querySelectorAll(".site-nav a[href^='#']");
+const spySections = Array.from(navLinks)
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
+
+if (navLinks.length && spySections.length && "IntersectionObserver" in window) {
+  const setActiveLink = (id) => {
+    navLinks.forEach((link) => {
+      link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
+    });
+  };
+
+  const spyObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveLink(entry.target.id);
+        }
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+  );
+
+  spySections.forEach((section) => spyObserver.observe(section));
+}
+
+const hero = document.querySelector(".hero");
+const canHover = window.matchMedia("(pointer: fine)").matches;
+
+if (hero && canHover && !prefersReducedMotion) {
+  hero.addEventListener("pointermove", (event) => {
+    const rect = hero.getBoundingClientRect();
+    hero.style.setProperty("--spot-x", `${event.clientX - rect.left}px`);
+    hero.style.setProperty("--spot-y", `${event.clientY - rect.top}px`);
+  });
+}
+
+const contactForm = document.querySelector("[data-contact-form]");
+const formNote = document.querySelector("[data-form-note]");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = contactForm.name.value.trim();
+    const email = contactForm.email.value.trim();
+    const subject = contactForm.subject.value.trim() || "Portfolio inquiry";
+    const message = contactForm.message.value.trim();
+
+    const body = `${message}\n\n— ${name} (${email})`;
+    const mailtoUrl = `mailto:mero5601@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoUrl;
+
+    if (formNote) {
+      formNote.textContent = "Opening your email client to send this message…";
+    }
+  });
+}

@@ -1,0 +1,33 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GHG emissions modeling cover">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5eead4"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#5eead4" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#5eead4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#818cf8" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#818cf8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.6" cy="1.6" r="1.6" fill="#ffffff" fill-opacity="0.07"/>
+    </pattern>
+  </defs>
+
+  <rect width="640" height="360" fill="#0b0d13"/>
+  <rect width="640" height="360" fill="url(#dots)"/>
+  <circle cx="80" cy="60" r="170" fill="url(#glow1)"/>
+  <circle cx="565" cy="310" r="170" fill="url(#glow2)"/>
+  <rect x="4" y="4" width="632" height="352" rx="20" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="1.5"/>
+
+  <circle cx="320" cy="152" r="72" fill="none" stroke="url(#g)" stroke-width="7"/>
+  <ellipse cx="320" cy="152" rx="30" ry="72" fill="none" stroke="url(#g)" stroke-width="4" stroke-opacity="0.5"/>
+  <line x1="248" y1="152" x2="392" y2="152" stroke="url(#g)" stroke-width="4" stroke-opacity="0.5"/>
+  <path d="M354 100 L400 62 M400 62 L400 88 M400 62 L374 62" fill="none" stroke="url(#g)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M232 244 L268 224 L300 236 L340 208 L372 220" fill="none" stroke="url(#g)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.85"/>
+
+  <text x="32" y="330" font-family="'SFMono-Regular',Consolas,'Courier New',monospace" font-size="14" fill="#9aa1b5">~/ghg-model.py</text>
+</svg>
