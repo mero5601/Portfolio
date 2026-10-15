@@ -1,4 +1,4 @@
-<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Discord music bot cover">
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Marlo Discord music bot cover">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#5eead4"/>
@@ -32,5 +32,5 @@
   <line x1="353" y1="154" x2="353" y2="96" stroke="url(#g)" stroke-width="6"/>
   <path d="M305 108 L360 92 L360 116 L305 132 Z" fill="url(#g)"/>
 
-  <text x="32" y="330" font-family="'SFMono-Regular',Consolas,'Courier New',monospace" font-size="14" fill="#9aa1b5">~/groovy-bot</text>
+  <text x="32" y="330" font-family="'SFMono-Regular',Consolas,'Courier New',monospace" font-size="14" fill="#9aa1b5">~/marlo</text>
 </svg>
